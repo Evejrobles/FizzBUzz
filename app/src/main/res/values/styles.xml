@@ -7,12 +7,14 @@
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
   </style>
-<style name="ValueDisplay" parent="AppTheme">
-  <item  name="android:textSize">150sp</item>
+
+  <style name="ValueDisplay" parent="AppTheme">
+    <item name="android:textSize">150sp</item>
   </style>
+
   <style name="FizzBuzzToggle" parent="AppTheme">
-  <item name="android:textSize">32sp</item>
-  <item name=" android:layout_width">150dp</item>
-</style>
+    <item name="android:textSize">32sp</item>
+    <item name=" android:layout_width">150dp</item>
+  </style>
 
 </resources>

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void refresh() {
-      int value = rng.nextInt(100);
+      int value = rng.nextInt(100) +1;
       valueDisplay.setText(Integer.toString(value));
 
   }
