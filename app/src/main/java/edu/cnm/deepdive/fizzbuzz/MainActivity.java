@@ -3,14 +3,23 @@ package edu.cnm.deepdive.fizzbuzz;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
   private TextView valueDisplay;
   private Random rng;
   private Timer timer;
+  private int value;
+  private int correct;
+  private int incorrect;
+  private ToggleButton fizzToggle;
+  private ToggleButton buzzToggle;
+  private TextView correctTally;
+  private TextView incorrectTally;
 
 
   @Override
@@ -18,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     valueDisplay = findViewById(R.id.value_display);
+    fizzToggle = findViewById(R.id.fizz_toggle);
+    buzzToggle = findViewById(R.id.buzz_toggle);
+    correctTally = findViewById(R.id.correct_tally);
+    incorrectTally = findViewById(R.id.incorrect_tally);
     rng = new Random();
 
   }
@@ -26,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onStart() {
     super.onStart();
     timer = new Timer();
-    timer.scheduleAtFixedRate(new UpdateTask(),  1000,  3000);
+    timer.scheduleAtFixedRate(new UpdateTask(), 1000, 3000);
   }
 
   @Override
@@ -37,10 +50,28 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void refresh() {
-      int value = rng.nextInt(100) +1;
-      valueDisplay.setText(Integer.toString(value));
+    if (value != 0) {
 
+      if (
+          ((value % 3 == 0) == fizzToggle.isChecked())
+              && ((value % 5 == 0) == buzzToggle.isChecked())
+      ) {
+        correct++;
+
+      } else {
+        incorrect++;
+
+        correctTally.setText(getString(R.string.correct_tally_format, correct));
+        incorrectTally.setText(getString(R.string.incorrect_tally_format, correct));
+        int value = rng.nextInt(100) + 1;
+        valueDisplay.setText(Integer.toString(value));
+        fizzToggle.setChecked(false);
+        buzzToggle.setChecked(false);
+
+      }
+    }
   }
+
   private class UpdateTask extends TimerTask {
 
     @Override
@@ -48,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
       runOnUiThread(new Updater());
     }
   }
+
   private class Updater implements Runnable {
 
     @Override
@@ -56,4 +88,3 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 }
-
