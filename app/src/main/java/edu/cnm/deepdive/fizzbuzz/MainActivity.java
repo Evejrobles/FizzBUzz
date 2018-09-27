@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
       } else {
         incorrect++;
-
+      }
+    }
         correctTally.setText(getString(R.string.correct_tally_format, correct));
         incorrectTally.setText(getString(R.string.incorrect_tally_format, correct));
         int value = rng.nextInt(100) + 1;
@@ -68,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         fizzToggle.setChecked(false);
         buzzToggle.setChecked(false);
 
-      }
-    }
+
+
   }
 
   private class UpdateTask extends TimerTask {
